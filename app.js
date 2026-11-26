@@ -27,6 +27,8 @@
   try { const saved = localStorage.getItem("lang"); if (saved in LANGS) state.lang = saved; } catch (_) { /* storage may be blocked */ }
 
   const t = () => UI[state.lang];
+  const HUES = [205, 28, 140, 262, 350, 42, 188, 318]; // soft icon tint per guide
+  const hueOf = (task) => HUES[TASKS.indexOf(task) % HUES.length];
 
   /* ---------- text helpers ---------- */
   function normalize(s) {
@@ -269,6 +271,7 @@
       const b = document.createElement("button");
       b.className = "tile";
       b.innerHTML = `<span class="ico" aria-hidden="true">${task.icon}</span><span></span>`;
+      b.firstChild.style.setProperty("--h", hueOf(task));
       b.lastChild.textContent = task.name[state.lang];
       b.addEventListener("click", () => openTask(task));
       $("tiles").appendChild(b);
@@ -279,7 +282,7 @@
 
   function renderStep() {
     const task = state.task, step = task.steps[state.idx], last = state.idx === task.steps.length - 1;
-    $("taskName").textContent = `${task.icon} ${task.name[state.lang]}`;
+    $("taskName").textContent = task.name[state.lang];
     $("stepIcon").textContent = step.icon;
     $("stepText").textContent = step[state.lang];
     $("dots").innerHTML = task.steps.map((_, i) => `<i class="${i < state.idx ? "done" : i === state.idx ? "now" : ""}"></i>`).join("");
@@ -287,6 +290,8 @@
     $("prev").disabled = state.idx === 0;
     $("next").textContent = last ? t().done : t().next;
     $("official").href = task.link;
+    $("stepCount").textContent = `${state.idx + 1} / ${task.steps.length}`;
+    $("guide").style.setProperty("--h", hueOf(task));
   }
 
   function show(view) {
