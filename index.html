@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sahayak – सहायक</title>
+  <meta name="description" content="Voice assistant that guides you step by step through government tasks, in Hindi and English.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo" aria-hidden="true">🙏</span><span id="brand">सहायक</span></div>
+    <div class="lang" role="group" aria-label="Language / भाषा">
+      <button data-lang="hi">हिन्दी</button>
+      <button data-lang="en">English</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home">
+      <h1 id="homeTitle"></h1>
+      <div id="slotHome"></div>
+      <div id="tiles" class="tiles"></div>
+    </section>
+
+    <section id="guide" hidden>
+      <div class="guide-bar">
+        <button id="homeBtn" class="ghost"></button>
+        <a id="official" class="ghost" target="_blank" rel="noopener"></a>
+      </div>
+      <h2 id="taskName"></h2>
+      <div id="dots" class="dots" aria-hidden="true"></div>
+      <div class="card" aria-live="polite">
+        <div id="stepIcon" class="step-icon" aria-hidden="true"></div>
+        <p id="stepText" class="step-text"></p>
+      </div>
+      <div class="nav">
+        <button id="prev" class="nav-btn"></button>
+        <button id="replay" class="nav-btn replay"></button>
+        <button id="next" class="nav-btn primary"></button>
+      </div>
+      <div id="slotGuide"></div>
+    </section>
+  </main>
+
+  <div id="micZone" class="mic-zone">
+    <button id="mic" class="mic" aria-label="Speak">
+      <svg viewBox="0 0 24 24" width="56%" height="56%" fill="currentColor" aria-hidden="true">
+        <path d="M12 15a3.5 3.5 0 0 0 3.5-3.5V6a3.5 3.5 0 1 0-7 0v5.5A3.5 3.5 0 0 0 12 15Zm6-3.5a1 1 0 1 0-2 0 4 4 0 0 1-8 0 1 1 0 1 0-2 0 6 6 0 0 0 5 5.92V20H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2v-2.58A6 6 0 0 0 18 11.5Z"/>
+      </svg>
+    </button>
+    <p id="status" class="status"></p>
+    <p id="heard" class="heard" aria-live="polite"></p>
+  </div>
+
+  <div id="voiceNote" class="note" role="alert" hidden></div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="strings.js?v=3"></script>
+  <script src="data.js?v=3"></script>
+  <script src="speech.js?v=3"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
